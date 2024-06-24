@@ -1,0 +1,42 @@
+name: teacher_dashboard
+description: A new Flutter project for a Teacher Dashboard.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.19.6 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  collection: ^1.18.0 # Updated
+  material_color_utilities: ^0.8.0 # Updated
+  meta: 1.12.0 # Updated
+  vm_service: 14.2.1 # Fixed version to avoid conflict
+  file_picker: ^8.0.5
+  csv: ^6.0.0
+  intl: ^0.19.0
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  leak_tracker: ^10.0.4 # Updated
+  leak_tracker_flutter_testing: ^3.0.3 # Updated
+  test_api: 0.7.0 # Fixed to match flutter_test
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/profile_picture.jpg
+    # Add other assets here
+
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Bold.ttf
+          weight: 700
