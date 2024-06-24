@@ -276,18 +276,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
         SizedBox(height: 16),
         Expanded(
-          child: Table(
-            border: TableBorder.all(color: Colors.red),
-            children: List.generate(6, (index) {
-              return TableRow(
-                children: List.generate(7, (index) {
-                  return Container(
-                    height: 40,
-                    child: Center(child: Text('')),
-                  );
-                }),
-              );
-            }),
+          child: SingleChildScrollView(
+            child: Table(
+              border: TableBorder.all(color: Colors.red),
+              children: List.generate(6, (index) {
+                return TableRow(
+                  children: List.generate(7, (index) {
+                    return Container(
+                      height: 40,
+                      child: Center(child: Text('')),
+                    );
+                  }),
+                );
+              }),
+            ),
           ),
         ),
       ],
@@ -389,3 +391,4 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 }
+                  
