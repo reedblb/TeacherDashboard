@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'dart:convert';
 import 'package:csv/csv.dart';
 import 'dart:io';
+import 'openai_service.dart';  // Add this import
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -12,6 +13,7 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   bool isAdmin = false;
+  OpenAIService openAIService = OpenAIService();  // Initialize the service
 
   final List<String> toDoList = [
     'Check assignments',
@@ -49,6 +51,28 @@ class _DashboardScreenState extends State<DashboardScreen> {
       setState(() {
         studentRecords = fields;
       });
+    }
+  }
+
+  void _getCodeCompletion(String prompt) async {
+    try {
+      String completion = await openAIService.completePrompt(prompt);
+      // Display the completion result in your preferred way, e.g., a dialog
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text("Code Completion"),
+          content: Text(completion),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text("OK"),
+            ),
+          ],
+        ),
+      );
+    } catch (e) {
+      print('Error: $e');
     }
   }
 
@@ -92,9 +116,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: Column(
           children: [
             if (isAdmin)
-              ElevatedButton(
-                onPressed: _pickFile,
-                child: Text("Upload CSV"),
+              Column(
+                children: [
+                  ElevatedButton(
+                    onPressed: _pickFile,
+                    child: Text("Upload CSV"),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => _getCodeCompletion("debug my flutter app"),
+                    child: Text("Get Debug Assistance"),
+                  ),
+                ],
               ),
             Expanded(
               child: Row(
@@ -391,4 +423,3 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 }
-                  
